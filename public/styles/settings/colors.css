@@ -1,0 +1,11 @@
+:root {
+  /* base */
+  --base-color: #76060b;
+  --base-color-2: #8f151b;
+  /* secondary */
+  --secondary-color: #eff0f2;
+  --secondary-color-2: #d8e0f2;
+  /* support */
+  --support-color: #442b27;
+  --support-color-2: #5e443f;
+}
