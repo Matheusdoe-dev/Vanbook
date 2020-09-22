@@ -1,0 +1,28 @@
+.beneficios-container {
+  padding: var(--gap-xl) 0;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: calc(var(--gap-sm) * 1.5);
+}
+
+.beneficios-card {
+  position: relative;
+}
+
+.beneficios-card-img {
+  width: 100%;
+}
+
+.beneficios-card-title {
+  max-width: 80%;
+
+  position: absolute;
+  left: 9.3%;
+  right: 9.3%;
+  top: 44.44%;
+  bottom: 41.08%;
+
+  text-align: center;
+  color: var(--secondary-color);
+}
