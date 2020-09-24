@@ -1,0 +1,9 @@
+.button {
+  display: block;
+  padding: var(--gap-sm) var(--gap-md);
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
