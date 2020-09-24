@@ -1,0 +1,14 @@
+.sobre {
+  padding: var(--gap-xl) 0;
+}
+
+.sobre-container {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  column-gap: calc(var(--gap-sm) * 1.5);
+  align-items: center;
+}
+
+.sobre-content-title {
+  margin-bottom: var(--gap-md);
+}
