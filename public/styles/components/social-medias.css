@@ -1,0 +1,7 @@
+.social-medias {
+    display: flex;
+}
+
+.social-medias-link:first-child {
+    padding-left: 0;
+}
