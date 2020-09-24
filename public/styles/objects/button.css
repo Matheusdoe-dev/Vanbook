@@ -1,5 +1,5 @@
 .button {
-  display: block;
+  display: inline-block;
   padding: var(--gap-sm) var(--gap-md);
   border-radius: 3px;
   -webkit-border-radius: 3px;
