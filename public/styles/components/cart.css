@@ -1,0 +1,118 @@
+.cart {
+  padding: var(--gap-xl) 0;
+
+  background: var(--secondary-color-2);
+}
+
+.cart-title-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--gap-lg);
+}
+
+.cart-container {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: var(--gap-lg);
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 1fr 9fr 1fr 1fr;
+  width: 100%;
+  padding: var(--gap-md);
+  margin-bottom: var(--gap-md);
+  border-radius: 3px;
+  background-color: var(--secondary-color);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+
+.cart-item:last-child {
+  margin-bottom: 0;
+}
+
+.card-item-info-label {
+  display: inline-block;
+  margin-bottom: var(--gap);
+
+  font-size: 0.875rem;
+  font-family: "Open sans", sans-serif;
+}
+
+.card-item-info-content {
+  font-size: 1rem;
+  font-family: "PT Serif", sans-serif;
+}
+
+.cart-item-price {
+  color: var(--base-color-2);
+  font-weight: 700;
+}
+
+.cart-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.cart-subtotal {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--gap-md);
+}
+
+.cart-subtotal-label {
+  margin-right: var(--gap-sm);
+}
+
+.cart-subtotal-content {
+  color: var(--base-color-2);
+  font-weight: 700;
+  font-size: 1.5rem;
+  font-family: "PT Serif", sans-serif;
+}
+
+.class-form-finalizar-btn {
+  margin-left: var(--gap-md);
+
+  background-color: var(--base-color-2);
+  color: var(--secondary-color);
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+}
+
+.class-form-finalizar-btn:hover {
+  filter: brightness(85%);
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+}
+
+.class-form-continuar-btn {
+  background-color: var(--secondary-color);
+  color: var(--support-color);
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+}
+
+.class-form-continuar-btn:hover {
+  filter: brightness(85%);
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  -webkit-filter: brightness(85%);
+}
