@@ -1,0 +1,32 @@
+.input-block {
+  margin-bottom: calc(var(--gap-sm) * 1.5);
+}
+
+.input-label {
+  display: block;
+
+  margin-bottom: var(--gap-sm);
+
+  font-size: 1rem;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  padding: var(--gap-sm);
+  border: none;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+
+  font-size: 1rem;
+  color: var(--support-color);
+}
+
+.input-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: calc(var(--gap-sm) * 1.5);
+}
