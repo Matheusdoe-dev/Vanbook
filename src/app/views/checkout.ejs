@@ -1,0 +1,86 @@
+<%- include('includes/head.ejs') %>
+    <link rel="stylesheet" href="/styles/components/header-library.css">
+    <link rel="stylesheet" href="/styles/components/checkout.css">
+    <link rel="stylesheet" href="/styles/components/social-medias.css">
+    <link rel="stylesheet" href="/styles/components/footer.css">
+
+  </head>
+  
+  <body>
+    <%- include('includes/header-library.ejs') %>
+
+    <main class="checkout">
+        <section class="checkout-title-container container">
+            <h2>Finalizar Compra</h2>
+        </section>
+        <section class="checkout-form-container container">
+            <div></div>
+            <form method="/library/checkout/order" action="POST" class="checkout-form">
+                <fieldset class="checkout-form-seus-dados checkout-fieldset">
+                    <h3 class="checkout-fieldset-title">
+                        Seus Dados
+                    </h3>
+
+                    <div class="input-block">
+                        <label class="input-label" for="name">Nome completo</label>
+                        <input class="checkout-input input" type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="input-block">
+                        <label class="input-label" for="email">E-mail</label>
+                        <input class="checkout-input input" type="email" id="email" name="email" required>
+                    </div>
+                </fieldset>
+                <fieldset class="checkout-form-seus-dados checkout-fieldset">
+                    <h3 class="checkout-fieldset-title">
+                        Dados de cobrança
+                    </h3>
+
+                    <div class="input-block">
+                        <label class="input-label" for="adress">Endereço</label>
+                        <input class="checkout-input input" type="text" id="adress" name="adress" required>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-block">
+                            <label class="input-label" for="city">Cidade</label>
+                            <input class="checkout-input input" type="text" id="city" name="city" required>
+                        </div>
+
+                        <div class="input-block">
+                            <label class="input-label" for="uf">UF</label>
+                            <input class="checkout-input input" type="text" id="uf" name="uf" required>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="checkout-form-seus-dados checkout-fieldset">
+                    <h3 class="checkout-fieldset-title">
+                        Forma de pagamento
+                    </h3>
+                    <div class="input-block">
+                        <label class="input-label" for="card-number">Numero do cartão</label>
+                        <input class="checkout-input input" type="text" id="card-number" name="card-number" required>
+                    </div>
+
+                    <div class="input-group">
+                         <div class="input-block">
+                            <label class="input-label" for="card-valid">Data de validade <sup>(mm/aa)</sup></label>
+                            <input class="checkout-input input" type="text" id="card-valid" name="card-valid" maxlength="5" required>
+                        </div>
+
+                         <div class="input-block">
+                            <label class="input-label" for="cvv">CVV <sup>(código de segurança)</sup></label>
+                            <input class="checkout-input input" type="number" id="cvv" name="cvv" maxlength="3" required>
+                        </div>
+                    </div>
+                </fieldset>
+                <button href="/library/checkout/end" class="checkout-submit-btn button">Finalizar compra</button>
+            </form>
+            <div></div>
+        </section>
+    </main>
+
+    <%- include('includes/footer.ejs') %>
+  </body>
+
+</html>
