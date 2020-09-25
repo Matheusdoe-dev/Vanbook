@@ -10,6 +10,11 @@ a {
   padding: 0.625rem;
 }
 
+a:hover,
+button:hover {
+  cursor: pointer;
+}
+
 body {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   color: var(--support-color);
@@ -25,4 +30,8 @@ img {
 
 ul {
   list-style: none;
+}
+
+fieldset {
+  border: none;
 }
