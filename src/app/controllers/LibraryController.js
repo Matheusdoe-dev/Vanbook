@@ -16,6 +16,18 @@ const LibraryController = {
       title: "Harry Potter e A Pedra Filosofal",
     });
   },
+
+  cartPage(req, res) {
+    return res.render("cart", {
+      title: "Carrinho",
+    });
+  },
+
+  checkoutPage(req, res) {
+    return res.render("checkout", {
+      title: "Finalizar Compra",
+    });
+  },
 };
 
 module.exports = LibraryController;

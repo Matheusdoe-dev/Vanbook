@@ -12,6 +12,12 @@ routes.get("/", LibraryController.landingPage);
 routes.get("/library", LibraryController.libraryPage);
 
 // get book page (dinamic route)
-routes.get("/library/:id", LibraryController.bookPage);
+routes.get("/library/books/:id", LibraryController.bookPage);
+
+// get cart page
+routes.get("/library/cart", LibraryController.cartPage);
+
+// get checkout page
+routes.get("/library/checkout", LibraryController.checkoutPage);
 
 module.exports = routes;
