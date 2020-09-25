@@ -25,10 +25,27 @@
   -o-border-radius: 3px;
   height: 491px;
   box-sizing: border-box;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  padding: 0;
 
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 2fr 1fr;
+}
+
+.ver-livros-card:hover {
+  cursor: pointer;
+  filter: brightness(90%);
+  -webkit-filter: brightness(90%);
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
 }
 
 .ver-livros-card-img {
