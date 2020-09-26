@@ -28,6 +28,12 @@ const LibraryController = {
       title: "Finalizar Compra",
     });
   },
+
+  checkoutEndPage(req, res) {
+    return res.render("checkout-end", {
+      title: "Obrigado pela preferência!",
+    });
+  },
 };
 
 module.exports = LibraryController;
