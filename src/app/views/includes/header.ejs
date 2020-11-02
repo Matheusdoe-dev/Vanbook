@@ -3,6 +3,40 @@
     <a href="/"
       ><img src="/assets/logo.svg" alt="Livraria Vanbook" class="brand"
     /></a>
+    <% if (header === "Admin") { %>
+    <nav class="header-nav">
+      <ul class="header-nav-menu">
+        <li class="header-nav-item">
+          <a href="/admin/add-new" class="header-add-book-btn button"
+            >Adicionar novo livro</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <% } else if (header === "Library-Page") { %>
+    <nav class="header-nav">
+      <ul class="header-nav-menu">
+        <% if (header === "Library-Page") { %>
+        <li class="header-nav-item">
+          <a href="/library" class="header-nav-link">Ver livros</a>
+        </li>
+        <% } %>
+        <li class="header-nav-item">
+          <a href="/library/cart" class="header-nav-link header-cart"
+            ><%= totalPrice %><img src="/assets/cart.svg" alt="Carrinho"
+          /></a>
+        </li>
+      </ul>
+    </nav>
+    <% } else if (header === "Admin-book") { %>
+    <nav class="header-nav">
+      <ul class="header-nav-menu">
+        <li class="header-nav-item">
+          <a href="/admin" class="header-nav-link">Ver Livros</a>
+        </li>
+      </ul>
+    </nav>
+    <% } else {%>
     <nav class="header-nav">
       <ul class="header-nav-menu">
         <li class="header-nav-item">
@@ -15,9 +49,10 @@
           <a href="#sobre" class="header-nav-link">Sobre</a>
         </li>
         <li class="header-nav-item">
-          <a href="#contato" class="header-nav-link">Contato</a>
+          <a href="#footer" class="header-nav-link">Contato</a>
         </li>
       </ul>
     </nav>
+    <% } %>
   </div>
 </header>

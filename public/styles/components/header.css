@@ -1,11 +1,11 @@
 .header {
+  padding: var(--gap-sm) 0;
+
   box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.14), 0px 3px 4px rgba(0, 0, 0, 0.12),
     0px 1px 8px rgba(0, 0, 0, 0.2);
 }
 
 .header-container {
-  padding: var(--gap-sm) 0;
-
   display: grid;
   grid-template-columns: 1fr 2.5fr;
   column-gap: calc(var(--gap-sm) * 1.5);
@@ -15,6 +15,7 @@
 .header-nav-menu {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .header-nav-item {
@@ -28,4 +29,33 @@
 .header-nav-link:hover {
   transition: 0.2s;
   color: var(--base-color-2);
+}
+
+.header-cart {
+  display: flex;
+  align-items: center;
+}
+
+.header-cart img {
+  margin-left: var(--gap-sm);
+}
+
+.header-add-book-btn {
+  background: var(--base-color-2);
+  color: var(--secondary-color);
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+}
+
+.header-add-book-btn:hover {
+  filter: brightness(85%);
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  -webkit-filter: brightness(85%);
 }
