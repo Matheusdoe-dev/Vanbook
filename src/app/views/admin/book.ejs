@@ -1,0 +1,72 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/styles/components/header.css">
+    <link rel="stylesheet" href="/styles/components/admin-library-book.css">
+    <link rel="stylesheet" href="/styles/components/social-medias.css">
+    <link rel="stylesheet" href="/styles/components/footer.css">
+
+  </head>
+  
+  <body>
+    <%- include('../includes/header.ejs') %>
+
+    <main class="book">
+        <% if (book) { %>
+            <div class="book-container container">
+                <img src="<%= book.image %>" alt="<%= book.name %>">
+                <article class="book-info">
+                    <div class="book-info-field">
+                        <p class="book-info-field-label">
+                            Nome do livro
+                        </p>
+                        <h3 class="book-info-field-content">
+                            <%= book.name %>
+                        </h3>
+                    </div>
+                    <div class="book-info-block">
+                        <div class="book-info-field">
+                            <p class="book-info-field-label">
+                                Autora ou autor
+                            </p>
+                            <h3 class="book-info-field-content">
+                                <%= book.author %>
+                            </h3>
+                        </div>
+                        <div class="book-info-field">
+                            <p class="book-info-field-label">
+                                Estilo literário
+                            </p>
+                            <h3 class="book-info-field-content">
+                                <%= book.style %>
+                            </h3>
+                        </div> 
+                    </div>
+                    <div class="book-info-field">
+                        <p class="book-info-field-label">
+                            Preço
+                        </p>
+                        <h3 class="book-info-field-content book-info-price">
+                            <%= book.price %>
+                        </h3>
+                    </div>
+                    <div class="button-group">
+                        <a href="/admin/edit-book/<%= book.id %>" class="primary-button button">
+                            Editar livro
+                        </a>
+                        <button form="delete" type="submit" class="secondary-button button">
+                            Apagar livro
+                        </button>
+                        <form id="delete" action="/admin/delete-book" method="POST">
+                            <input type="hidden" name="id" id="id" value="<%= book.id %>">
+                        </form>
+                    </div>
+                </article>
+            </div>
+        <% } else { %>
+            <div class="book-container container">
+                <h1>Livro não encontrado</h1>
+            </div>
+        <% } %>
+    </main>
+
+    <%- include('../includes/footer.ejs') %>
+
