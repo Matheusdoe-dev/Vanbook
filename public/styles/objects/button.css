@@ -1,9 +1,15 @@
 .button {
   display: inline-block;
   padding: var(--gap-sm) var(--gap-md);
+  border: none;
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
+}
+
+.button-group button,
+.button-group a {
+  margin-right: calc(var(--gap-sm) * 1.5);
 }
