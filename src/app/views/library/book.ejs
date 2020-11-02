@@ -1,0 +1,68 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/styles/components/header.css">
+    <link rel="stylesheet" href="/styles/components/book.css">
+    <link rel="stylesheet" href="/styles/components/social-medias.css">
+    <link rel="stylesheet" href="/styles/components/footer.css">
+
+  </head>
+  
+  <body>
+    <%- include('../includes/header.ejs', { totalPrice }) %>
+
+    <main class="book">
+        <% if (book) { %>
+            <div class="book-container container">
+                <img src="<%= book.image %>" alt="<%= book.name %>">
+                <article class="book-info">
+                    <div class="book-info-field">
+                        <p class="book-info-field-label">
+                            Nome do livro
+                        </p>
+                        <h3 class="book-info-field-content">
+                            <%= book.name %>
+                        </h3>
+                    </div>
+                    <div class="book-info-block">
+                        <div class="book-info-field">
+                            <p class="book-info-field-label">
+                                Autora ou autor
+                            </p>
+                            <h3 class="book-info-field-content">
+                                <%= book.author %>
+                            </h3>
+                        </div>
+                        <div class="book-info-field">
+                            <p class="book-info-field-label">
+                                Estilo literário
+                            </p>
+                            <h3 class="book-info-field-content">
+                                <%= book.style %>
+                            </h3>
+                        </div> 
+                    </div>
+                    <div class="book-info-field">
+                        <p class="book-info-field-label">
+                            Preço
+                        </p>
+                        <h3 class="book-info-field-content book-info-price">
+                            <%= book.price %>
+                        </h3>
+                    </div>
+                    <form action="/library/cart" method="POST">
+                        <button 
+                            type="submit" 
+                            class="book-add-to-cart button"
+                        >
+                            Adicionar ao carrinho
+                        </button>
+                        <input type="hidden" name="book_id" value="<%= book.id %>">
+                        <input type="hidden" name="book_price" value="<%= book.price %>">
+                    </form>
+                </article>
+            </div>
+        <% } else { %>
+        <% } %>
+    </main>
+
+    <%- include('../includes/footer.ejs') %>
+

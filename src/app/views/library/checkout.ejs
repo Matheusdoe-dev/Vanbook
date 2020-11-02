@@ -1,5 +1,5 @@
-<%- include('includes/head.ejs') %>
-    <link rel="stylesheet" href="/styles/components/header-library.css">
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/styles/components/header.css">
     <link rel="stylesheet" href="/styles/components/checkout.css">
     <link rel="stylesheet" href="/styles/components/social-medias.css">
     <link rel="stylesheet" href="/styles/components/footer.css">
@@ -7,7 +7,7 @@
   </head>
   
   <body>
-    <%- include('includes/header-library.ejs') %>
+    <%- include('../includes/header.ejs') %>
 
     <main class="checkout">
         <section class="checkout-title-container container">
@@ -15,7 +15,7 @@
         </section>
         <section class="checkout-form-container container">
             <div></div>
-            <form method="/library/checkout/order" action="POST" class="checkout-form">
+            <form method="/library/checkout/end" action="GET" class="checkout-form">
                 <fieldset class="checkout-form-seus-dados checkout-fieldset">
                     <h3 class="checkout-fieldset-title">
                         Seus Dados
@@ -80,7 +80,4 @@
         </section>
     </main>
 
-    <%- include('includes/footer.ejs') %>
-  </body>
-
-</html>
+    <%- include('../includes/footer.ejs') %>

@@ -1,0 +1,61 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/styles/components/header.css">
+    <link rel="stylesheet" href="/styles/components/cart.css">
+    <link rel="stylesheet" href="/styles/components/social-medias.css">
+    <link rel="stylesheet" href="/styles/components/footer.css">
+
+  </head>
+  
+  <body>
+    <%- include('../includes/header.ejs', { totalPrice }) %>
+
+    <main class="cart">
+        <% if (orders.length > 0) { %>
+            <div class="cart-title-container container">
+                <h2 class="cart-title">Carrinho</h2>
+            </div>
+            <section class="cart-container container">
+                <% for (let order of orders) { %>
+                    <article class="cart-item">
+                        <img src="<%= order.product.image %>" alt="<%= order.product.name %>" class="cart-item-img">
+                        <div class="cart-item-title cart-item-info">
+                            <span class="card-item-info-label">Título</span>
+                            <p class="card-item-info-content"><%= order.product.name %></p>
+                        </div>
+                        <div class="cart-item-qtd cart-item-info">   
+                            <span class="card-item-info-label">Qtd</span>
+                            <p class="card-item-info-content"><%= order.qty %></p>
+                        </div>
+                        <div class="cart-item-info">
+                            <span class="card-item-info-label">Preço</span>
+                            <p class="card-item-info-content cart-item-price"><%= order.price %></p>
+                        </div>
+                        <form action="/library/cart/delete" method="POST" class="cart-item-delete">
+                            <input type="hidden" id="product_id" name="product_id" value="<%= order.product.id %>">
+                            <input type="hidden" id="product_price" name="product_price" value="<%= order.product.price %>">
+                            <button type="submit" class="cart-item-delete-button">
+                                <div class="cart-item-delete-icon"></div> 
+                            </button>
+                        </form>
+                    </article>
+                <% } %>
+            </section>
+            <section class="cart-form-container container">
+                <div class="cart-subtotal">
+                    <span class="cart-subtotal-label">Subtotal</span>
+                    <p class="cart-subtotal-content"><%= totalPrice %></p>
+                </div>
+                <div class="class-form-buttons">
+                    <a href="/library" class="class-form-continuar-btn button">Continuar comprando</a>
+                    <a href="/library/checkout" class="class-form-finalizar-btn button">Finalizar Compra</a>
+                </div>
+            </section>
+        <% } else { %>
+            <div class="cart-title-container container">
+                <h2 class="cart-title">Não há items no carrinho</h2>
+            </div>
+        <% } %>
+    </main>
+
+    <%- include('../includes/footer.ejs') %>
+

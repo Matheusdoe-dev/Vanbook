@@ -1,0 +1,39 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/styles/components/header.css">
+    <link rel="stylesheet" href="/styles/components/livraria.css">
+    <link rel="stylesheet" href="/styles/components/social-medias.css">
+    <link rel="stylesheet" href="/styles/components/footer.css">
+
+  </head>
+  
+  <body>
+    <%- include('../includes/header.ejs', { totalPrice }) %>
+
+    <section class="livraria">
+      <% if (books.length > 0) { %>
+        <div class="livraria-container container">
+          <section class="livraria-content">
+            <% for (let book of books) { %>
+              <a class="livraria-card" href="/library/books/<%= book.id %>">
+                <img class="livraria-card-img" src="<%= book.image %>" alt="<%= book.name %>">
+                <div class="livraria-card-info">
+                  <h3 class="livraria-card-info-title">
+                    <%= book.name %>
+                  </h3>
+                  <p class="livraria-card-info-price">
+                    <%= book.price %>
+                  </p>
+                </div>
+              </a>
+            <% } %>
+          </section>
+        </div>
+      <% } else { %>
+        <div class="sem-livros-container container">
+          <h3 class="sem-livros-aviso">Não há livros disponiveis</h3>
+        </div>
+      <% } %>
+    </section>
+
+    <%- include('../includes/footer.ejs') %>
+
