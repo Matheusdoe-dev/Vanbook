@@ -1,0 +1,30 @@
+.edit-book {
+  padding: var(--gap-xl) 0;
+
+  background-color: var(--secondary-color-2);
+}
+
+.edit-book-container {
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  column-gap: var(--gap-xl);
+}
+
+.input {
+  background: var(--secondary-color);
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+}
+
+.input:focus {
+  filter: brightness(85%);
+  -webkit-filter: brightness(85%);
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+}
