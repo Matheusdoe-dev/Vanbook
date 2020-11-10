@@ -2,15 +2,16 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
+
+if (process.env.NODE_ENV === 'development') {
+  // environments variables config
+  require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
+}
 
 const libraryRoutes = require('./routes/library');
 const adminRoutes = require('./routes/admin');
 
 const app = express();
-
-// environments variables config
-dotenv.config({ path: path.resolve(__dirname, '..', '.env') });
 
 // template engine
 app.set('view engine', 'ejs');
