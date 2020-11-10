@@ -6,8 +6,12 @@
 
 .add-new-container {
   display: grid;
-  grid-template-columns: 3fr 9fr;
+  grid-template-columns: 1fr 3fr 1fr;
   column-gap: var(--gap-xl);
+}
+
+.add-new-form {
+  grid-column-start: 2;
 }
 
 .input {

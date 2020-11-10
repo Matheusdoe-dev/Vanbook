@@ -1,5 +1,5 @@
 .hero {
-  background: url("../../assets/hero-img.jpg");
+  background: url('../../../assets/hero-img.jpg');
 
   min-height: 629px;
 }
@@ -19,7 +19,7 @@
 }
 
 .hero-title::after {
-  content: "";
+  content: '';
   display: block;
   width: 24px;
   height: 3px;
