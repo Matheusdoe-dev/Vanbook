@@ -1,133 +1,63 @@
-const path = require('path');
-const fs = require('fs');
+// database
+const db = require('../../config/database');
 // utils
 const formatToCurrency = require('../../utils/formatToCurrency');
 const parseCurrencyToNumber = require('../../utils/parseCurrencyToNumber');
 
-const p = path.join(__dirname, '..', '..', '..', 'tmp', 'cart.json');
-
-// utils
-const getCartFromFile = (callback) => {
-  fs.readFile(p, (err, fileContent) => {
-    let cart;
-
-    if (!err) {
-      cart = JSON.parse(fileContent);
-    } else {
-      cart = { products: [], totalPrice: 0 };
-    }
-
-    if (callback) {
-      callback(cart);
-    }
-  });
-};
-
 // Cart model
 class Cart {
   // add product
-  static addProduct(id, productPrice, callback) {
-    // Fetch the previous cart
-    fs.readFile(p, (err, fileContent) => {
-      let cart = { products: [], totalPrice: 0 };
-      if (!err) {
-        cart = JSON.parse(fileContent);
-      }
+  static async addProduct(id, productPrice) {
+    const existingProduct = await db
+      .execute('SELECT * FROM cart WHERE cart.book_id = ?', [id])
+      .then((r) => r[0][0]);
 
-      // Analyze the cart => Find existing product
-      const existingProductIndex = cart.products.findIndex(
-        (product) => product.id == id
+    if (existingProduct) {
+      const updatedQty = existingProduct.qty + 1;
+      const updatedPrice = formatToCurrency(
+        'pt-br',
+        'BRL',
+        parseCurrencyToNumber(productPrice, 'float') * updatedQty
       );
-      const existingProduct = cart.products[existingProductIndex];
-      let updatedProduct;
 
-      // Add new product / increase quantity
-      if (existingProduct) {
-        updatedProduct = { ...existingProduct };
-        updatedProduct.qty++;
-        cart.products = [...cart.products];
-        cart.products[existingProductIndex] = updatedProduct;
-      } else {
-        updatedProduct = { id: id, qty: 1 };
-        cart.products = [...cart.products, updatedProduct];
-      }
-
-      const serializedPrice =
-        parseCurrencyToNumber(cart.totalPrice, 'float') +
-        parseCurrencyToNumber(productPrice, 'float');
-
-      cart.totalPrice = formatToCurrency('pt-BR', 'BRL', serializedPrice);
-
-      // saving the cart on file
-      fs.writeFile(p, JSON.stringify(cart), (err) => {
-        if (err) {
-          console.log(err);
-          return;
-        }
-
-        if (callback) {
-          callback();
-        }
-      });
-    });
+      return db.execute(
+        'UPDATE cart SET qty = ?, price = ? WHERE (book_id = ?)',
+        [updatedQty, updatedPrice, id]
+      );
+    } else {
+      return db.execute(
+        'INSERT INTO cart (book_id, qty, price) VALUES (?, 1, ?)',
+        [id, productPrice]
+      );
+    }
   }
 
   // delete a product qtd from cart
-  static deleteProduct(id, productPrice, callback) {
-    getCartFromFile((cart) => {
-      if (!cart) {
-        return;
-      }
-
-      // updated cart
-      const updatedCart = { ...cart };
-
-      // getting product and product price
-      const product = updatedCart.products.find((prod) => prod.id === id);
-
-      if (!product) {
-        return;
-      }
-
-      const productQty = product.qty;
-
-      // updating cart
-      updatedCart.products = updatedCart.products.filter(
-        (prod) => prod.id !== id
-      );
-
-      updatedCart.totalPrice = formatToCurrency(
-        'PT-BR',
-        'BRL',
-        parseCurrencyToNumber(cart.totalPrice, 'float') -
-          parseCurrencyToNumber(productPrice, 'float') * productQty
-      );
-
-      fs.writeFile(p, JSON.stringify(updatedCart), (err) => {
-        if (err) {
-          console.log('error');
-          return;
-        }
-
-        if (callback) {
-          callback();
-        }
-      });
-    });
+  static async deleteProduct(id) {
+    return db.execute('DELETE FROM cart WHERE (book_id = ?)', [id]);
   }
 
   // get cart products
-  static getCartProducts(callback) {
-    getCartFromFile(callback);
+  static getCartProducts() {
+    return db.execute('SELECT * FROM cart');
   }
 
   // get cart totalPrice
-  static getCartTotalPrice(callback) {
-    getCartFromFile((cart) => {
-      const totalPrice = cart.totalPrice;
+  static async getCartTotalPrice() {
+    const cartProducts = await db
+      .execute('SELECT * FROM cart')
+      .then((r) => r[0])
+      .catch((err) => {
+        console.log(err);
+      });
 
-      callback(totalPrice);
+    let totalPrice = 0.0;
+
+    cartProducts.forEach((product) => {
+      totalPrice += parseCurrencyToNumber(product.price, 'float');
     });
+
+    return formatToCurrency('pt-br', 'BRL', totalPrice);
   }
 }
 
