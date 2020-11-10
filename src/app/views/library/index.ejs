@@ -35,38 +35,35 @@
         </article>
       </div>
     </section>
-
-
     
-        <% if (books.length > 0) { %>
-          <section id="ver-livros" class="ver-livros">  
-            <div class="ver-livros-container container">
-              <section class="ver-livros-content">
-                <% for (let book of books) { %>
-                  <a href="/library/books/<%= book.id %>" class="ver-livros-card">
-                    <img class="ver-livros-card-img" src="<%= book.image_url %>" alt="<%= book.name %>">
-                    <div class="ver-livros-card-info">
-                      <h3 class="ver-livros-card-info-title">
-                        <%= book.name %>
-                      </h3>
-                      <p class="ver-livros-card-info-price">
-                        <%= book.price %>
-                      </p>
-                    </div>
-                  </a>
-                <% } %>
-              </section>
-              <section class="ver-livros-cta">
-                <a href="/library" class="ver-livros-cta-button button">
-                  Ver todos os livros
-                </a>
-              </section>
-            </div>
+    <% if (books.length > 0) { %>
+      <section id="ver-livros" class="ver-livros">  
+        <div class="ver-livros-container container">
+          <section class="ver-livros-content">
+            <% for (let book of books) { %>
+              <a href="/library/books/<%= book.book_id %>" class="ver-livros-card">
+                <img class="ver-livros-card-img" src="<%= book.image_url %>" alt="<%= book.name %>">
+                <div class="ver-livros-card-info">
+                  <h3 class="ver-livros-card-info-title">
+                    <%= book.name %>
+                  </h3>
+                  <p class="ver-livros-card-info-price">
+                    <%= book.price %>
+                  </p>
+                </div>
+              </a>
+            <% } %>
           </section>
-        <% } else { %>
-        <% } %>
-      
-
+          <section class="ver-livros-cta">
+            <a href="/library" class="ver-livros-cta-button button">
+              Ver todos os livros
+            </a>
+          </section>
+        </div>
+      </section>
+    <% } else { %>
+    <% } %>
+  
     <section id="sobre" class="sobre">
       <div class="sobre-container container">
         <article class="sobre-content">
