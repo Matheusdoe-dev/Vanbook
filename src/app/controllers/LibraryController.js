@@ -1,6 +1,7 @@
 // models
 const Book = require('../models/Book');
 const Cart = require('../models/Cart');
+const Order = require('../models/Order');
 // utils
 const formatToCurrency = require('../../utils/formatToCurrency');
 const parseCurrencyToNumber = require('../../utils/parseCurrencyToNumber');
@@ -25,6 +26,7 @@ const LibraryController = {
   async libraryPage(req, res) {
     const totalPrice = await Cart.getCartTotalPrice();
 
+    // find all books to render on view
     await Book.findAll()
       .then((books) => {
         return res.render('library/library', {
@@ -59,6 +61,7 @@ const LibraryController = {
       });
   },
 
+  // cart page
   async cartPage(req, res) {
     const cart = await Cart.getCartProducts().then((r) => r[0]);
 
@@ -97,6 +100,7 @@ const LibraryController = {
       });
   },
 
+  // add to cart functionality
   async addToCart(req, res) {
     const { book_id, book_price } = req.body;
 
@@ -109,6 +113,7 @@ const LibraryController = {
       });
   },
 
+  // remove from cart functionality
   async removeFromCart(req, res) {
     const { book_id, book_price } = req.body;
 
@@ -121,6 +126,7 @@ const LibraryController = {
       });
   },
 
+  // checkout page
   async checkoutPage(req, res) {
     const totalPrice = await Cart.getCartTotalPrice();
 
@@ -131,6 +137,41 @@ const LibraryController = {
     });
   },
 
+  // checkout functionality
+  async checkout(req, res) {
+    const {
+      name,
+      email,
+      address,
+      city,
+      uf,
+      card_number,
+      card_valid,
+      cvv,
+    } = await req.body;
+
+    const order = new Order(
+      name,
+      email,
+      address,
+      city,
+      uf,
+      card_number,
+      card_valid,
+      cvv
+    );
+
+    await order
+      .create()
+      .then(() => {
+        res.redirect('/library/checkout/end');
+      })
+      .catch((err) => {
+        return res.status(400).send({ err });
+      });
+  },
+
+  // checkout done page
   checkoutEndPage(req, res) {
     return res.render('library/checkout-end', {
       title: 'Obrigado pela preferência!',
