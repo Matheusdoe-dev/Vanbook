@@ -1,21 +1,9 @@
-const path = require('path');
-const fs = require('fs');
+// database
+const db = require('../../config/database');
 // models
 const Cart = require('./Cart');
 // utils
 const formatToCurrency = require('../../utils/formatToCurrency');
-
-const p = path.join(__dirname, '..', '..', '..', 'tmp', 'products.json');
-
-const getProductsFromFile = (cb) => {
-  fs.readFile(p, (err, fileContent) => {
-    if (err) {
-      cb([]);
-    } else {
-      cb(JSON.parse(fileContent));
-    }
-  });
-};
 
 // Book model
 class Book {
@@ -24,66 +12,42 @@ class Book {
     this.author = author;
     this.style = style;
     this.price = formatToCurrency('pt-br', 'BRL', Number.parseFloat(price));
-    this.image = image;
+    this.image_url = image;
   }
 
+  // create new book
   create() {
-    getProductsFromFile((products) => {
-      this.id = products.length + 1;
-      products.push(this);
-      fs.writeFile(p, JSON.stringify(products), (err) => {
-        console.log(err);
-      });
-    });
+    return db.execute(
+      `INSERT INTO books (name, author, price, image_url, style) VALUES (?,?,?,?,?);`,
+      [this.name, this.author, this.price, this.image_url, this.style]
+    );
   }
 
-  static editById(id, data, cb) {
-    getProductsFromFile((products) => {
-      const product = products.find((product) => product.id == id);
-      product.name = data.name;
-      product.author = data.author;
-      product.price = formatToCurrency(
-        'pt-BR',
-        'BRL',
-        Number.parseFloat(data.price)
-      );
-      product.style = data.style;
-      fs.writeFile(p, JSON.stringify(products), (err) => {
-        console.log(err);
-      });
-      cb();
-    });
+  // edit a book
+  static editById(id, data) {
+    return db.execute(
+      'UPDATE books SET name = ?, author = ?, price = ?, image_url = ?, style = ? WHERE books.book_id = ?',
+      [data.name, data.author, data.price, data.image, data.style, id]
+    );
   }
 
-  static deleteById(id, cb) {
-    getProductsFromFile((products) => {
-      const selectedProduct = products.find((product) => product.id == id);
-      const newProducts = products.filter(
-        (product) => product.id !== selectedProduct.id
-      );
-      fs.writeFile(p, JSON.stringify(newProducts), (err) => {
-        if (!err) {
-          Cart.deleteProduct(id, selectedProduct.price);
-        }
-      });
+  // delete a book
+  static async deleteById(id) {
+    await Cart.deleteProduct(id);
 
-      // check if exists a callback to follow
-      if (cb) {
-        cb();
-      }
-    });
+    return db.execute('DELETE FROM books WHERE (books.book_id = ?)', [id]);
   }
 
-  static findAll(cb) {
-    getProductsFromFile(cb);
+  // find all books
+  static async findAll() {
+    return db.execute(`SELECT * FROM books`).then((r) => r[0]);
   }
 
-  static findById(id, cb) {
-    getProductsFromFile((products) => {
-      const product = products.find((product) => product.id == id);
-
-      cb(product);
-    });
+  // find book by id
+  static async findById(id) {
+    return db
+      .execute('SELECT * FROM books WHERE books.book_id = ?', [id])
+      .then((r) => r[0][0]);
   }
 }
 

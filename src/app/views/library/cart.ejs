@@ -1,6 +1,6 @@
 <%- include('../includes/head.ejs') %>
     <link rel="stylesheet" href="/styles/components/header.css">
-    <link rel="stylesheet" href="/styles/components/cart.css">
+    <link rel="stylesheet" href="/styles/components/library/cart.css">
     <link rel="stylesheet" href="/styles/components/social-medias.css">
     <link rel="stylesheet" href="/styles/components/footer.css">
 
@@ -17,10 +17,10 @@
             <section class="cart-container container">
                 <% for (let order of orders) { %>
                     <article class="cart-item">
-                        <img src="<%= order.product.image %>" alt="<%= order.product.name %>" class="cart-item-img">
+                        <img src="<%= order.book.image_url %>" alt="<%= order.book.name %>" class="cart-item-img">
                         <div class="cart-item-title cart-item-info">
                             <span class="card-item-info-label">Título</span>
-                            <p class="card-item-info-content"><%= order.product.name %></p>
+                            <p class="card-item-info-content"><%= order.book.name %></p>
                         </div>
                         <div class="cart-item-qtd cart-item-info">   
                             <span class="card-item-info-label">Qtd</span>
@@ -31,8 +31,8 @@
                             <p class="card-item-info-content cart-item-price"><%= order.price %></p>
                         </div>
                         <form action="/library/cart/delete" method="POST" class="cart-item-delete">
-                            <input type="hidden" id="product_id" name="product_id" value="<%= order.product.id %>">
-                            <input type="hidden" id="product_price" name="product_price" value="<%= order.product.price %>">
+                            <input type="hidden" id="book_id" name="book_id" value="<%= order.book.book_id %>">
+                            <input type="hidden" id="book_price" name="book_price" value="<%= order.book.price %>">
                             <button type="submit" class="cart-item-delete-button">
                                 <div class="cart-item-delete-icon"></div> 
                             </button>

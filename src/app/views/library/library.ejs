@@ -1,6 +1,6 @@
 <%- include('../includes/head.ejs') %>
     <link rel="stylesheet" href="/styles/components/header.css">
-    <link rel="stylesheet" href="/styles/components/livraria.css">
+    <link rel="stylesheet" href="/styles/components/library.css">
     <link rel="stylesheet" href="/styles/components/social-medias.css">
     <link rel="stylesheet" href="/styles/components/footer.css">
 
@@ -14,8 +14,8 @@
         <div class="livraria-container container">
           <section class="livraria-content">
             <% for (let book of books) { %>
-              <a class="livraria-card" href="/library/books/<%= book.id %>">
-                <img class="livraria-card-img" src="<%= book.image %>" alt="<%= book.name %>">
+              <a class="livraria-card" href="/library/books/<%= book.book_id %>">
+                <img class="livraria-card-img" src="<%= book.image_url %>" alt="<%= book.name %>">
                 <div class="livraria-card-info">
                   <h3 class="livraria-card-info-title">
                     <%= book.name %>

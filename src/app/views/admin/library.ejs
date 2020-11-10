@@ -1,6 +1,6 @@
 <%- include('../includes/head.ejs') %>
     <link rel="stylesheet" href="/styles/components/header.css">
-    <link rel="stylesheet" href="/styles/components/admin-livraria.css">
+    <link rel="stylesheet" href="/styles/components/admin/library.css">
     <link rel="stylesheet" href="/styles/components/social-medias.css">
     <link rel="stylesheet" href="/styles/components/footer.css">
 
@@ -10,12 +10,12 @@
     <%- include('../includes/header.ejs') %>
 
     <section class="admin-livraria">
-      <% if (prods.length > 0) { %>
+      <% if (prods) { %>
         <div class="admin-livraria-container container">
             <section class="admin-livraria-content">
               <% for (let product of prods) { %>
-                <a class="admin-livraria-card" href="/admin/books/<%= product.id %>">
-                  <img class="admin-livraria-card-img" src="<%= product.image %>" alt="<%= product.name %>">
+                <a class="admin-livraria-card" href="/admin/books/<%= product.book_id %>">
+                  <img class="admin-livraria-card-img" src="<%= product.image_url %>" alt="<%= product.name %>">
                   <div class="admin-livraria-card-info">
                     <h3 class="admin-livraria-card-info-title">
                       <%= product.name %>
