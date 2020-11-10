@@ -15,7 +15,7 @@
         </section>
         <section class="checkout-form-container container">
             <div></div>
-            <form method="/library/checkout/end" action="GET" class="checkout-form">
+            <form method="POST" action="/library/checkout" class="checkout-form">
                 <fieldset class="checkout-form-seus-dados checkout-fieldset">
                     <h3 class="checkout-fieldset-title">
                         Seus Dados
@@ -37,8 +37,8 @@
                     </h3>
 
                     <div class="input-block">
-                        <label class="input-label" for="adress">Endereço</label>
-                        <input class="checkout-input input" type="text" id="adress" name="adress" required>
+                        <label class="input-label" for="address">Endereço</label>
+                        <input class="checkout-input input" type="text" id="address" name="address" required>
                     </div>
 
                     <div class="input-group">
@@ -49,7 +49,7 @@
 
                         <div class="input-block">
                             <label class="input-label" for="uf">UF</label>
-                            <input class="checkout-input input" type="text" id="uf" name="uf" required>
+                            <input class="checkout-input input" type="text" id="uf" name="uf" maxlength="2" required>
                         </div>
                     </div>
                 </fieldset>
@@ -58,14 +58,14 @@
                         Forma de pagamento
                     </h3>
                     <div class="input-block">
-                        <label class="input-label" for="card-number">Numero do cartão</label>
-                        <input class="checkout-input input" type="text" id="card-number" name="card-number" required>
+                        <label class="input-label" for="card_number">Numero do cartão</label>
+                        <input class="checkout-input input" type="text" id="card_number" name="card_number" required>
                     </div>
 
                     <div class="input-group">
                          <div class="input-block">
-                            <label class="input-label" for="card-valid">Data de validade <sup>(mm/aa)</sup></label>
-                            <input class="checkout-input input" type="text" id="card-valid" name="card-valid" maxlength="5" required>
+                            <label class="input-label" for="card_valid">Data de validade <sup>(mm/aa)</sup></label>
+                            <input class="checkout-input input" type="text" id="card_valid" name="card_valid" maxlength="5" required>
                         </div>
 
                          <div class="input-block">
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                 </fieldset>
-                <button href="/library/checkout/end" class="checkout-submit-btn button">Finalizar compra</button>
+                <button type="submit" class="checkout-submit-btn button">Finalizar compra</button>
             </form>
             <div></div>
         </section>

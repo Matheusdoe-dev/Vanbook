@@ -23,6 +23,9 @@ routes.post('/library/cart', LibraryController.addToCart);
 // delete product from cart
 routes.post('/library/cart/delete', LibraryController.removeFromCart);
 
+// post order checkout
+routes.post('/library/checkout', LibraryController.checkout);
+
 // get checkout page
 routes.get('/library/checkout', LibraryController.checkoutPage);
 
