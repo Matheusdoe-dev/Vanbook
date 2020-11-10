@@ -1,6 +1,6 @@
 <%- include('../includes/head.ejs') %>
     <link rel="stylesheet" href="/styles/components/header.css">
-    <link rel="stylesheet" href="/styles/components/edit-book.css">
+    <link rel="stylesheet" href="/styles/components/admin/edit-book.css">
     <link rel="stylesheet" href="/styles/components/social-medias.css">
     <link rel="stylesheet" href="/styles/components/footer.css">
 
@@ -11,43 +11,46 @@
 
     <main class="edit-book">
         <% if (book) { %>
-        <div class="edit-book-container container">
-            <img src="<%= book.image %>" alt="<%= book.name %>">
-            <form class="edit-book-form" action="/admin/edit-book" method="POST">
-              <div class="input-block">
-                <label class="input-label" for="name">Nome do livro</label>
-                <input class="input" type="text" name="name" id="name" value="<%= book.name %>" required>
-              </div>
-
-              <div class="input-group">
+          <div class="edit-book-container container">
+              <img src="<%= book.image_url %>" alt="<%= book.name %>">
+              <form class="edit-book-form" action="/admin/edit-book" method="POST">
                 <div class="input-block">
-                  <label class="input-label" for="author">Autor</label>
-                  <input class="input" type="text" name="author" id="author" value="<%= book.author %>" required>
+                  <label class="input-label" for="name">Nome do livro</label>
+                  <input class="input" type="text" name="name" id="name" value="<%= book.name %>" required>
                 </div>
+
+                <div class="input-group">
+                  <div class="input-block">
+                    <label class="input-label" for="author">Autor</label>
+                    <input class="input" type="text" name="author" id="author" value="<%= book.author %>" required>
+                  </div>
+                  <div class="input-block">
+                    <label class="input-label" for="style">Estilo literário</label>
+                    <input class="input" type="text" name="style" id="style" value="<%= book.style %>" required>
+                  </div>
+                </div>
+
                 <div class="input-block">
-                  <label class="input-label" for="style">Estilo literário</label>
-                  <input class="input" type="text" name="style" id="style" value="<%= book.style %>" required>
+                  <label class="input-label" for="price">Preço</label>
+                  <input class="input" type="text" name="price" id="price" value="<%= book.price %>" required>
                 </div>
-              </div>
 
-              <div class="input-block">
-                <label class="input-label" for="price">Preço</label>
-                <input class="input" type="text" name="price" id="price" value="<%= book.price %>" required>
-              </div>
+                <div class="input-block">
+                  <label class="input-label" for="image">URL da capa</label>
+                  <input class="input" type="url" name="image" id="image" value="<%= book.image_url %>" required>
+                </div>
 
-              <div class="input-block">
-                <label class="input-label" for="image">URL da capa</label>
-                <input class="input" type="url" name="image" id="image" value="<%= book.image %>" required>
-              </div>
-
-              <div class="button-group">
-                <input type="hidden" name="id" value="<%= book.id %>">
-                <button type="submit" class="primary-button button">Salvar</button>
-                <a href="/admin" class="secondary-button button">Voltar</a>
-              </div>
-            </form>
-        </div>
+                <div class="button-group">
+                  <input type="hidden" name="id" id="id" value="<%= book.book_id %>">
+                  <button type="submit" class="primary-button button">Salvar</button>
+                  <a href="/admin" class="secondary-button button">Voltar</a>
+                </div>
+              </form>
+          </div>
         <% } else { %>
+          <div class="book-container container">
+              <h1>Livro não encontrado</h1>
+          </div>
         <% } %>
     </main>
 

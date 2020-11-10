@@ -1,9 +1,9 @@
 <%- include('../includes/head.ejs') %>
     <link rel="stylesheet" href="/styles/components/header.css">
-    <link rel="stylesheet" href="/styles/components/hero.css">
-    <link rel="stylesheet" href="/styles/components/beneficios-section.css">
-    <link rel="stylesheet" href="/styles/components/ver-livros-section.css">
-    <link rel="stylesheet" href="/styles/components/sobre-section.css">
+    <link rel="stylesheet" href="/styles/components/library/hero.css">
+    <link rel="stylesheet" href="/styles/components/library/benefits-section.css">
+    <link rel="stylesheet" href="/styles/components/library/books-section.css">
+    <link rel="stylesheet" href="/styles/components/library/about-section.css">
     <link rel="stylesheet" href="/styles/components/footer.css">
     <link rel="stylesheet" href="/styles/components/social-medias.css">
 
@@ -44,7 +44,7 @@
               <section class="ver-livros-content">
                 <% for (let book of books) { %>
                   <a href="/library/books/<%= book.id %>" class="ver-livros-card">
-                    <img class="ver-livros-card-img" src="<%= book.image %>" alt="<%= book.name %>">
+                    <img class="ver-livros-card-img" src="<%= book.image_url %>" alt="<%= book.name %>">
                     <div class="ver-livros-card-info">
                       <h3 class="ver-livros-card-info-title">
                         <%= book.name %>

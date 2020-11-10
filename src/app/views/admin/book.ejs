@@ -1,6 +1,6 @@
 <%- include('../includes/head.ejs') %>
     <link rel="stylesheet" href="/styles/components/header.css">
-    <link rel="stylesheet" href="/styles/components/admin-library-book.css">
+    <link rel="stylesheet" href="/styles/components/admin/library-book.css">
     <link rel="stylesheet" href="/styles/components/social-medias.css">
     <link rel="stylesheet" href="/styles/components/footer.css">
 
@@ -12,7 +12,7 @@
     <main class="book">
         <% if (book) { %>
             <div class="book-container container">
-                <img src="<%= book.image %>" alt="<%= book.name %>">
+                <img src="<%= book.image_url %>" alt="<%= book.name %>">
                 <article class="book-info">
                     <div class="book-info-field">
                         <p class="book-info-field-label">
@@ -49,14 +49,14 @@
                         </h3>
                     </div>
                     <div class="button-group">
-                        <a href="/admin/edit-book/<%= book.id %>" class="primary-button button">
+                        <a href="/admin/edit-book/<%= book.book_id %>" class="primary-button button">
                             Editar livro
                         </a>
                         <button form="delete" type="submit" class="secondary-button button">
                             Apagar livro
                         </button>
                         <form id="delete" action="/admin/delete-book" method="POST">
-                            <input type="hidden" name="id" id="id" value="<%= book.id %>">
+                            <input type="hidden" name="id" id="id" value="<%= book.book_id %>">
                         </form>
                     </div>
                 </article>
