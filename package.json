@@ -1,13 +1,16 @@
 {
   "name": "vanbook",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "src/server/server.js",
   "author": "Matheusdoe-dev <matheusdoe.dev@gmail.com>",
   "license": "MIT",
   "scripts": {
     "start": "NODE_ENV=production node src/server/server.js",
     "predev": "NODE_ENV=development sequelize db:create",
-    "dev": "NODE_ENV=development nodemon src/server/server.js"
+    "dev": "NODE_ENV=development nodemon src/server/server.js",
+    "pretest": "NODE_ENV=test sequelize db:migrate:undo:all && rm --force ./tests/database.sqlite && NODE_ENV=test sequelize db:migrate",
+    "test": "NODE_ENV=test jest --coverage",
+    "posttest": "NODE_ENV=test sequelize db:migrate:undo:all && rm --force ./tests/database.sqlite"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -16,9 +19,7 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "mysql2": "^2.2.5",
-    "sequelize": "^6.3.5",
-    "sequelize-cli": "^6.2.0",
-    "sqlite3": "^5.0.0"
+    "sequelize": "^6.3.5"
   },
   "devDependencies": {
     "eslint": "^7.12.1",
@@ -26,6 +27,10 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.1.4",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "faker": "^5.1.0",
+    "jest": "^26.6.3",
+    "sequelize-cli": "^6.2.0",
+    "sqlite3": "^5.0.0"
   }
 }
