@@ -2,12 +2,15 @@
   padding: var(--gap-xl) 0;
 
   background: var(--secondary-color-2);
+  min-height: 100vh;
 }
 
 .checkout-end-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  text-align: center;
 }
 
 .checkout-end-title,

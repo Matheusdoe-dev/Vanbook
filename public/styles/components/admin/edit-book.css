@@ -28,3 +28,22 @@
   -ms-transition: 0.2s;
   -o-transition: 0.2s;
 }
+
+@media (max-width: 767.98px) {
+  .edit-book-container {
+    display: flex;
+    flex-direction: column-reverse;
+    row-gap: var(--gap-xl);
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--gap-md);
+  }
+
+  .button {
+    text-align: center;
+    margin-bottom: var(--gap-md);
+  }
+}

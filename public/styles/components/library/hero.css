@@ -1,7 +1,9 @@
 .hero {
   background: url('../../../assets/hero-img.jpg');
 
-  min-height: 629px;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .hero-container {
@@ -10,7 +12,7 @@
 }
 
 .hero-title {
-  margin: calc(var(--gap-xl) * 1.5) auto 0 auto;
+  margin: calc(var(--gap-xl) * 2) auto 0 auto;
 
   color: var(--secondary-color);
   text-transform: uppercase;
@@ -31,4 +33,10 @@
   color: var(--secondary-color);
   margin: 0 auto;
   text-align: center;
+}
+
+@media (max-width: 767.98px) {
+  .hero {
+    max-height: 328px;
+  }
 }

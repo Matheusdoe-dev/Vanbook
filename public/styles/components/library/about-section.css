@@ -1,15 +1,28 @@
-.sobre {
+.about {
   padding: var(--gap-xl) 0;
   background-color: var(--secondary-color-2);
 }
 
-.sobre-container {
+.about-container {
   display: grid;
   grid-template-columns: 7fr 5fr;
   column-gap: calc(var(--gap-sm) * 1.5);
   align-items: center;
 }
 
-.sobre-content-title {
+.about-content-title {
   margin-bottom: var(--gap-md);
+}
+
+.about-content-img {
+  justify-self: flex-start;
+}
+
+@media (max-width: 767.98px) {
+  .about-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: calc(var(--gap-sm) * 1.5);
+    align-items: center;
+  }
 }

@@ -16,7 +16,7 @@ button:hover {
 }
 
 body {
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   color: var(--support-color);
   background-color: var(--secondary-color);
 
@@ -25,7 +25,7 @@ body {
 
 img {
   display: block;
-  max-width: 100%;
+  width: 100%;
 }
 
 ul {

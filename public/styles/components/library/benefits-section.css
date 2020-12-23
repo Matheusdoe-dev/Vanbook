@@ -1,4 +1,4 @@
-.beneficios-container {
+.benefits-container {
   padding: var(--gap-xl) 0;
 
   display: grid;
@@ -6,15 +6,15 @@
   column-gap: calc(var(--gap-sm) * 1.5);
 }
 
-.beneficios-card {
+.benefits-card {
   position: relative;
 }
 
-.beneficios-card-img {
+.benefits-card-img {
   width: 100%;
 }
 
-.beneficios-card-title {
+.benefits-card-title {
   max-width: 80%;
 
   position: absolute;
@@ -25,4 +25,12 @@
 
   text-align: center;
   color: var(--secondary-color);
+}
+
+@media (max-width: 767.98px) {
+  .benefits-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: calc(var(--gap-sm) * 1.5);
+  }
 }

@@ -51,3 +51,31 @@
   -ms-transition: 0.2s;
   -o-transition: 0.2s;
 }
+
+@media (max-width: 767.98px) {
+  .book-container {
+    display: flex;
+    flex-direction: column-reverse;
+    row-gap: var(--gap-xl);
+
+    text-align: center;
+  }
+
+  .book-info,
+  .book-info-block {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--gap-md);
+  }
+
+  .button {
+    text-align: center;
+    margin-bottom: var(--gap-md);
+  }
+}

@@ -27,7 +27,7 @@
 }
 
 .checkout-fieldset-title:after {
-  content: "";
+  content: '';
   display: block;
   width: 46px;
   height: 3px;
@@ -77,4 +77,20 @@
   -ms-transition: 0.2s;
   -o-transition: 0.2s;
   -webkit-filter: brightness(85%);
+}
+
+@media (max-width: 767.98px) {
+  .checkout-form-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+  }
+
+  .checkout-title-container > h2 {
+    margin: 0 auto;
+  }
+
+  .checkout-submit-btn {
+    width: 100%;
+  }
 }

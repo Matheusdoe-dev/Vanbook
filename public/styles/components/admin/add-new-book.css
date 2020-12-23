@@ -36,3 +36,26 @@
 .button-group button {
   margin-right: calc(var(--gap-sm) * 1.5);
 }
+
+@media (max-width: 767.98px) {
+  .add-new-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: var(--gap-xl);
+  }
+
+  .add-new-form {
+    grid-column-start: 1;
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--gap-md);
+  }
+
+  .button {
+    text-align: center;
+    margin-bottom: var(--gap-md);
+  }
+}

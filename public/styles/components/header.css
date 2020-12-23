@@ -38,6 +38,9 @@
 
 .header-cart img {
   margin-left: var(--gap-sm);
+
+  width: 35px;
+  height: 35px;
 }
 
 .header-add-book-btn {
@@ -58,4 +61,17 @@
   -ms-transition: 0.2s;
   -o-transition: 0.2s;
   -webkit-filter: brightness(85%);
+}
+
+.brand {
+  width: 286px;
+  height: 27px;
+}
+
+@media (max-width: 767.98px) {
+  .header-container {
+    grid-template-columns: 1fr;
+    row-gap: calc(var(--gap-sm) * 1.5);
+    justify-items: center;
+  }
 }

@@ -4,7 +4,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "PT Serif", serif;
+  font-family: 'PT Serif', serif;
   font-weight: 700;
   line-height: 1.15em;
 }
@@ -43,13 +43,13 @@ span {
 
 input,
 span {
-  font-family: "PT Serif", serif;
+  font-family: 'PT Serif', serif;
   font-weight: 400;
 }
 
 a,
 button {
-  font-family: "PT Serif", serif;
+  font-family: 'PT Serif', serif;
   font-weight: 400;
 }
 
@@ -75,5 +75,31 @@ button {
   input,
   span {
     font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  h1 {
+    font-size: 4.5rem;
+  }
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  h3 {
+    font-size: 2.25rem;
+  }
+
+  h4 {
+    font-size: 1.5rem;
+  }
+
+  p,
+  a,
+  button,
+  input,
+  span {
+    font-size: 1.25rem;
   }
 }

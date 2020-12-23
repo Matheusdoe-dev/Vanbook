@@ -13,3 +13,9 @@
 .button-group a {
   margin-right: calc(var(--gap-sm) * 1.5);
 }
+
+@media (max-width: 767.98px) {
+  .button {
+    padding: var(--gap-md);
+  }
+}
