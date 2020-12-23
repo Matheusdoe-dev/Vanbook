@@ -4,7 +4,9 @@ const SmoothScroll = (seletor) => {
   const scrollToSection = (event) => {
     event.preventDefault();
     const href = event.currentTarget.getAttribute('href');
-    const section = document.querySelector(href);
+    const section = document.querySelector(
+      href.includes('/') ? href.replace('/', '').trim() : href
+    );
 
     section.scrollIntoView({
       behavior: 'smooth',
@@ -17,4 +19,4 @@ const SmoothScroll = (seletor) => {
   });
 };
 
-SmoothScroll("a[href^='#']");
+SmoothScroll("a[href^='/#']");
