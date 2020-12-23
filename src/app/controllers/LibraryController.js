@@ -1,20 +1,20 @@
-// models
-const Book = require('../models/Book');
+const Product = require('../models/Product');
 const Cart = require('../models/Cart');
 const Order = require('../models/Order');
-// utils
+
 const formatToCurrency = require('../../utils/formatToCurrency');
 const parseCurrencyToNumber = require('../../utils/parseCurrencyToNumber');
+const getCartTotalPrice = require('../../utils/getCartTotalPrice');
 
 const LibraryController = {
   // landing page / index
   async landingPage(req, res) {
-    await Book.findAll()
-      .then((books) => {
+    await Product.findAll()
+      .then((products) => {
         return res.render('library/index', {
           title: 'Livraria Digital',
           header: 'Landing',
-          books: books.filter((book) => book.book_id <= 4),
+          products: products.filter((product) => product.id <= 4),
         });
       })
       .catch((err) => {
@@ -24,15 +24,14 @@ const LibraryController = {
 
   // library/shop page
   async libraryPage(req, res) {
-    const totalPrice = await Cart.getCartTotalPrice();
+    const totalPrice = await getCartTotalPrice();
 
-    // find all books to render on view
-    await Book.findAll()
-      .then((books) => {
+    await Product.findAll()
+      .then((products) => {
         return res.render('library/library', {
           title: 'Todos os livros',
           header: 'Library-Page',
-          books,
+          products,
           totalPrice: totalPrice || 'R$ 0,00',
         });
       })
@@ -45,14 +44,14 @@ const LibraryController = {
   async bookPage(req, res) {
     const bookId = req.params.id;
 
-    const totalPrice = await Cart.getCartTotalPrice();
+    const totalPrice = await getCartTotalPrice();
 
-    await Book.findById(bookId)
-      .then((book) => {
+    await Product.findOne({ where: { id: bookId } })
+      .then((product) => {
         return res.render('library/book', {
-          title: book ? book.name : 'Livro não encontrado',
+          title: product ? product.name : 'Livro não encontrado',
           header: 'Library-Page',
-          book,
+          product,
           totalPrice: totalPrice || 'R$ 0,00',
         });
       })
@@ -63,26 +62,27 @@ const LibraryController = {
 
   // cart page
   async cartPage(req, res) {
-    const cart = await Cart.getCartProducts().then((r) => r[0]);
+    const cart = await Cart.findAll();
 
-    const totalPrice = await Cart.getCartTotalPrice();
+    const totalPrice = await getCartTotalPrice();
 
-    await Book.findAll()
-      .then((books) => {
+    await Product.findAll()
+      .then((products) => {
         const cartOrders = [];
 
-        books.forEach((book) => {
+        products.forEach((product) => {
           const cartProductData = cart.find(
-            (prod) => prod.book_id === book.book_id
+            (prod) => prod.product_id === product.id
           );
 
           if (cartProductData) {
             const price =
-              parseCurrencyToNumber(book.price, 'float') * cartProductData.qty;
+              parseCurrencyToNumber(product.price, 'float') *
+              cartProductData.product_qty;
 
             cartOrders.push({
-              book,
-              qty: cartProductData.qty,
+              product,
+              qty: cartProductData.product_qty,
               price: formatToCurrency('pt-BR', 'BRL', price),
             });
           }
@@ -102,33 +102,71 @@ const LibraryController = {
 
   // add to cart functionality
   async addToCart(req, res) {
-    const { book_id, book_price } = req.body;
+    const { product_id, product_price } = req.body;
 
-    await Cart.addProduct(Number(book_id), book_price)
-      .then(() => {
-        res.redirect('/library/cart');
+    const existingProduct = await Cart.findOne({ where: { product_id } });
+
+    if (existingProduct) {
+      await Cart.update(
+        {
+          product_qty: existingProduct.getDataValue('product_qty') + 1,
+        },
+        { where: { product_id } }
+      )
+        .then(() => {
+          res.redirect('/library/cart');
+        })
+        .catch(() => {
+          res.status(400).json({ err });
+        });
+    } else {
+      await Cart.create({
+        product_id,
+        product_cost: product_price,
+        product_qty: +1,
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then(() => {
+          res.redirect('/library/cart');
+        })
+        .catch((err) => {
+          res.status(400).json({ err });
+        });
+    }
   },
 
   // remove from cart functionality
   async removeFromCart(req, res) {
-    const { book_id, book_price } = req.body;
+    const { product_id } = req.body;
 
-    await Cart.deleteProduct(book_id, book_price)
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        res.redirect('/library/cart');
-      });
+    const existingProduct = await Cart.findOne({ where: { product_id } });
+
+    if (existingProduct.product_qty > 1) {
+      await Cart.update(
+        {
+          product_qty: existingProduct.getDataValue('product_qty') - 1,
+        },
+        { where: { product_id } }
+      )
+        .catch((err) => {
+          res.status(400).json({ err });
+        })
+        .finally(() => {
+          res.redirect('/library/cart');
+        });
+    } else {
+      await Cart.destroy({ where: { product_id } })
+        .catch((err) => {
+          res.status(400).json({ err });
+        })
+        .finally(() => {
+          res.redirect('/library/cart');
+        });
+    }
   },
 
   // checkout page
   async checkoutPage(req, res) {
-    const totalPrice = await Cart.getCartTotalPrice();
+    const totalPrice = await getCartTotalPrice();
 
     return res.render('library/checkout', {
       title: 'Finalizar Compra',
@@ -150,7 +188,7 @@ const LibraryController = {
       cvv,
     } = await req.body;
 
-    const order = new Order(
+    await Order.create({
       name,
       email,
       address,
@@ -158,11 +196,8 @@ const LibraryController = {
       uf,
       card_number,
       card_valid,
-      cvv
-    );
-
-    await order
-      .create()
+      cvv,
+    })
       .then(() => {
         res.redirect('/library/checkout/end');
       })

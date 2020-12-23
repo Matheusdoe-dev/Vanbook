@@ -1,17 +1,19 @@
-// models
-const Book = require('../models/Book');
+const { sequelize } = require('../models/index');
+
+const Product = require('../models/Product');
 const Cart = require('../models/Cart');
 
-// admin controller
+const formatToCurrency = require('../../utils/formatToCurrency');
+const parseCurrencyToNumber = require('../../utils/parseCurrencyToNumber');
+
 const AdminController = {
-  // library page
   async libraryPage(req, res) {
-    await Book.findAll()
-      .then((books) => {
+    await Product.findAll()
+      .then((products) => {
         return res.render('admin/library', {
           title: 'Livraria, todos os livros',
           header: 'Admin',
-          prods: books,
+          products,
         });
       })
       .catch((err) => {
@@ -19,16 +21,15 @@ const AdminController = {
       });
   },
 
-  // single book page
   async bookPage(req, res) {
-    const bookId = req.params.id;
+    const productId = req.params.id;
 
-    await Book.findById(bookId)
-      .then((book) => {
+    await Product.findOne({ where: { id: productId } })
+      .then((product) => {
         return res.render('admin/book', {
-          title: book ? book.name : 'Livro não encontrado',
+          title: product ? product.name : 'Livro não encontrado',
           header: 'Admin-book',
-          book,
+          product,
         });
       })
       .catch((err) => {
@@ -36,7 +37,6 @@ const AdminController = {
       });
   },
 
-  // add new book page
   addNewBookPage(req, res) {
     return res.render('admin/add-new-book', {
       title: 'Adicione um novo livro',
@@ -44,56 +44,62 @@ const AdminController = {
     });
   },
 
-  // add new book functionality
   async addNewBook(req, res) {
     const { name, author, style, price, image } = req.body;
 
-    const book = new Book(name, author, style, price, image);
-
-    await book
-      .create()
-      .then(() => {
-        res.redirect('/admin');
-      })
-      .catch((err) => {
-        console.log(err);
+    await Product.create({
+      name,
+      author,
+      style,
+      price: formatToCurrency(
+        'pt-br',
+        'BRL',
+        parseCurrencyToNumber(price, 'float')
+      ),
+      image,
+    })
+      .then(() => res.redirect('/admin'))
+      .catch(() => {
         res.status(400).redirect('/admin/add-new');
       });
   },
 
-  // edit a book page
   async editBookPage(req, res) {
-    const bookId = req.params.id;
+    const productId = req.params.id;
 
-    await Book.findById(bookId)
-      .then((book) => {
+    await Product.findOne({ where: { id: productId } })
+      .then((product) => {
         return res.render('admin/edit-book', {
-          title: book ? book.name : 'Livro não encontrado',
+          title: product ? product.name : 'Livro não encontrado',
           header: 'Admin-book',
-          book,
+          product,
         });
       })
-      .catch((err) => {
-        return res.status(400).send({ err });
+      .catch(() => {
+        return res.status(400).redirect('/admin');
       });
   },
 
-  // edit book functionality
   async editBook(req, res) {
     const { name, author, style, price, id, image } = req.body;
 
-    await Book.editById(id, {
-      name,
-      author,
-      style,
-      price,
-      image,
-    })
-      .then(() => {
-        res.redirect('/admin');
-      })
-      .catch((err) => {
-        res.status(400).send({ error: err });
+    await Product.update(
+      {
+        name,
+        author,
+        style,
+        price: formatToCurrency(
+          'pt-br',
+          'BRL',
+          parseCurrencyToNumber(price, 'float')
+        ),
+        image,
+      },
+      { where: { id } }
+    )
+      .then(() => res.redirect('/admin'))
+      .catch(() => {
+        res.status(400).redirect('/admin');
       });
   },
 
@@ -101,10 +107,18 @@ const AdminController = {
   async deleteBook(req, res) {
     const { id } = req.body;
 
-    await Cart.deleteProduct(id).catch((err) => res.status(400).send({ err }));
+    const transaction = await sequelize.transaction();
 
-    await Book.deleteById(id)
+    await Cart.destroy({ where: { product_id: id } }).catch(
+      () => {
+        res.status(400).redirect('/admin');
+      },
+      { transaction }
+    );
+
+    await Product.destroy({ where: { id } }, { transaction })
       .then(() => {
+        transaction.commit();
         res.redirect('/admin');
       })
       .catch(() => {

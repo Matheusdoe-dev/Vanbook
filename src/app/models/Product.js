@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 // database
 const { sequelize } = require('./index');
 
-const Order = sequelize.define('Order', {
+const Product = sequelize.define('Product', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -15,40 +15,25 @@ const Order = sequelize.define('Order', {
     allowNull: false,
   },
 
-  email: {
+  author: {
     type: Sequelize.STRING,
     allowNull: false,
   },
 
-  address: {
+  style: {
     type: Sequelize.STRING,
     allowNull: false,
   },
 
-  city: {
+  price: {
     type: Sequelize.STRING,
     allowNull: false,
   },
 
-  uf: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-
-  card_number: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-
-  card_valid: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-
-  cvv: {
+  image: {
     type: Sequelize.STRING,
     allowNull: false,
   },
 });
 
-module.exports = Order;
+module.exports = Product;
