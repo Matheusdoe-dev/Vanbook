@@ -19,43 +19,43 @@
         </div>
     </main>
 
-    <section id="beneficios" class="beneficios">
-      <div class="beneficios-container container">
-        <article class="beneficios-card">
-          <img class="beneficios-card-img" src="/assets/card-img-1.jpg" alt="Disfrute de nossa livraria digital">
-          <h3 class="beneficios-card-title">Disfrute de nossa livraria digital</h3>
+    <section id="benefits" class="benefits">
+      <div class="benefits-container container">
+        <article class="benefits-card">
+          <img class="benefits-card-img" src="/assets/card-img-1.jpg" alt="Disfrute de nossa livraria digital">
+          <h3 class="benefits-card-title">Disfrute de nossa livraria digital</h3>
         </article>
-        <article class="beneficios-card">
-          <img class="beneficios-card-img" src="/assets/card-img-2.jpg" alt="Compre ou venda livros novos e usados">
-          <h3 class="beneficios-card-title">Compre livros novos ou usados</h3>
+        <article class="benefits-card">
+          <img class="benefits-card-img" src="/assets/card-img-2.jpg" alt="Compre ou venda livros novos e usados">
+          <h3 class="benefits-card-title">Compre livros novos ou usados</h3>
         </article>
-        <article class="beneficios-card">
-          <img class="beneficios-card-img" src="/assets/card-img-3.jpg" alt="Tudo isso sem sair de casa">
-          <h3 class="beneficios-card-title">Tudo isso sem sair de casa</h3>
+        <article class="benefits-card">
+          <img class="benefits-card-img" src="/assets/card-img-3.jpg" alt="Tudo isso sem sair de casa">
+          <h3 class="benefits-card-title">Tudo isso sem sair de casa</h3>
         </article>
       </div>
     </section>
     
-    <% if (books.length > 0) { %>
-      <section id="ver-livros" class="ver-livros">  
-        <div class="ver-livros-container container">
-          <section class="ver-livros-content">
-            <% for (let book of books) { %>
-              <a href="/library/books/<%= book.book_id %>" class="ver-livros-card">
-                <img class="ver-livros-card-img" src="<%= book.image_url %>" alt="<%= book.name %>">
-                <div class="ver-livros-card-info">
-                  <h3 class="ver-livros-card-info-title">
-                    <%= book.name %>
+    <% if (products.length > 0) { %>
+      <section id="books" class="books">  
+        <div class="books-container container">
+          <section class="books-content">
+            <% for (let product of products) { %>
+              <a href="/library/books/<%= product.id %>" class="books-card">
+                <img class="books-card-img" src="<%= product.image %>" alt="<%= product.name %>">
+                <div class="books-card-info">
+                  <h3 class="books-card-info-title">
+                    <%= product.name %>
                   </h3>
-                  <p class="ver-livros-card-info-price">
-                    <%= book.price %>
+                  <p class="books-card-info-price">
+                    <%= product.price %>
                   </p>
                 </div>
               </a>
             <% } %>
           </section>
-          <section class="ver-livros-cta">
-            <a href="/library" class="ver-livros-cta-button button">
+          <section class="books-cta">
+            <a href="/library" class="books-cta-button button">
               Ver todos os livros
             </a>
           </section>
@@ -64,18 +64,18 @@
     <% } else { %>
     <% } %>
   
-    <section id="sobre" class="sobre">
-      <div class="sobre-container container">
-        <article class="sobre-content">
-          <h2 class="sobre-content-title">
+    <section id="about" class="about">
+      <div class="about-container container">
+        <article class="about-content">
+          <h2 class="about-content-title">
             Um pouco sobre nossa história
           </h2>
-          <p class="sobre-content-text">
+          <p class="about-content-text">
             Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI.<br><br>
             Quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos.
           </p>
         </article>
-        <img src="/assets/sobre-img.jpg" alt="Livraria, imagem sobre">
+        <img src="/assets/sobre-img.jpg" class="about-content-img" alt="Livraria, imagem about">
       </div>
     </section>
 

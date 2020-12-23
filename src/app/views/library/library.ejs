@@ -9,19 +9,19 @@
   <body>
     <%- include('../includes/header.ejs', { totalPrice }) %>
 
-    <section class="livraria">
-      <% if (books.length > 0) { %>
-        <div class="livraria-container container">
-          <section class="livraria-content">
-            <% for (let book of books) { %>
-              <a class="livraria-card" href="/library/books/<%= book.book_id %>">
-                <img class="livraria-card-img" src="<%= book.image_url %>" alt="<%= book.name %>">
-                <div class="livraria-card-info">
-                  <h3 class="livraria-card-info-title">
-                    <%= book.name %>
+    <section class="library">
+      <% if (products.length > 0) { %>
+        <div class="library-container container">
+          <section class="library-content">
+            <% for (let product of products) { %>
+              <a class="library-card" href="/library/books/<%= product.id %>">
+                <img class="library-card-img" src="<%= product.image %>" alt="<%= product.name %>">
+                <div class="library-card-info">
+                  <h3 class="library-card-info-title">
+                    <%= product.name %>
                   </h3>
-                  <p class="livraria-card-info-price">
-                    <%= book.price %>
+                  <p class="library-card-info-price">
+                    <%= product.price %>
                   </p>
                 </div>
               </a>
@@ -29,8 +29,8 @@
           </section>
         </div>
       <% } else { %>
-        <div class="sem-livros-container container">
-          <h3 class="sem-livros-aviso">Não há livros disponiveis</h3>
+        <div class="no-books-container container">
+          <h3 class="no-books-aviso">Não há livros disponiveis</h3>
         </div>
       <% } %>
     </section>

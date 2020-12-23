@@ -1,6 +1,6 @@
 <%- include('../includes/head.ejs') %>
     <link rel="stylesheet" href="/styles/components/header.css">
-    <link rel="stylesheet" href="/styles/components/admin/library.css">
+    <link rel="stylesheet" href="/styles/components/library.css">
     <link rel="stylesheet" href="/styles/components/social-medias.css">
     <link rel="stylesheet" href="/styles/components/footer.css">
 
@@ -9,18 +9,18 @@
   <body>
     <%- include('../includes/header.ejs') %>
 
-    <section class="admin-livraria">
-      <% if (prods) { %>
-        <div class="admin-livraria-container container">
-            <section class="admin-livraria-content">
-              <% for (let product of prods) { %>
-                <a class="admin-livraria-card" href="/admin/books/<%= product.book_id %>">
-                  <img class="admin-livraria-card-img" src="<%= product.image_url %>" alt="<%= product.name %>">
-                  <div class="admin-livraria-card-info">
-                    <h3 class="admin-livraria-card-info-title">
+    <section class="library">
+      <% if (products.length > 0) { %>
+        <div class="library-container container">
+            <section class="library-content">
+              <% for (let product of products) { %>
+                <a class="library-card" href="/admin/books/<%= product.id %>">
+                  <img class="library-card-img" src="<%= product.image %>" alt="<%= product.name %>">
+                  <div class="library-card-info">
+                    <h3 class="library-card-info-title">
                       <%= product.name %>
                     </h3>
-                    <p class="admin-livraria-card-info-price">
+                    <p class="library-card-info-price">
                       <%= product.price %>
                     </p>
                   </div>
@@ -29,8 +29,8 @@
             </section>
         </div>
       <% } else { %>
-        <div class="sem-livros-container container">
-            <h3 class="sem-livros-aviso">Nenhum livro foi encontrado</h3>
+        <div class="no-books-container container">
+            <h3 class="no-books-aviso">Nenhum livro foi encontrado</h3>
         </div>
       <% } %>
       

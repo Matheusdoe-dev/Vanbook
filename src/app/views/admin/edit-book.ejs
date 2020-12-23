@@ -10,38 +10,38 @@
     <%- include('../includes/header.ejs') %>
 
     <main class="edit-book">
-        <% if (book) { %>
+        <% if (product) { %>
           <div class="edit-book-container container">
-              <img src="<%= book.image_url %>" alt="<%= book.name %>">
+              <img src="<%= product.image %>" alt="<%= product.name %>">
               <form class="edit-book-form" action="/admin/edit-book" method="POST">
                 <div class="input-block">
                   <label class="input-label" for="name">Nome do livro</label>
-                  <input class="input" type="text" name="name" id="name" value="<%= book.name %>" required>
+                  <input class="input" type="text" name="name" id="name" value="<%= product.name %>" required>
                 </div>
 
                 <div class="input-group">
                   <div class="input-block">
                     <label class="input-label" for="author">Autor</label>
-                    <input class="input" type="text" name="author" id="author" value="<%= book.author %>" required>
+                    <input class="input" type="text" name="author" id="author" value="<%= product.author %>" required>
                   </div>
                   <div class="input-block">
                     <label class="input-label" for="style">Estilo literário</label>
-                    <input class="input" type="text" name="style" id="style" value="<%= book.style %>" required>
+                    <input class="input" type="text" name="style" id="style" value="<%= product.style %>" required>
                   </div>
                 </div>
 
                 <div class="input-block">
                   <label class="input-label" for="price">Preço</label>
-                  <input class="input" type="text" name="price" id="price" value="<%= book.price %>" required>
+                  <input class="input" type="text" name="price" id="price" value="<%= product.price %>" required>
                 </div>
 
                 <div class="input-block">
                   <label class="input-label" for="image">URL da capa</label>
-                  <input class="input" type="url" name="image" id="image" value="<%= book.image_url %>" required>
+                  <input class="input" type="url" name="image" id="image" value="<%= product.image %>" required>
                 </div>
 
                 <div class="button-group">
-                  <input type="hidden" name="id" id="id" value="<%= book.book_id %>">
+                  <input type="hidden" name="id" id="id" value="<%= product.id %>">
                   <button type="submit" class="primary-button button">Salvar</button>
                   <a href="/admin" class="secondary-button button">Voltar</a>
                 </div>
